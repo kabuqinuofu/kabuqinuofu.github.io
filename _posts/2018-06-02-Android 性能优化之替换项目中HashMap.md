@@ -29,7 +29,7 @@ HashMapEntry<K,V> next;
 4、建立公共溢出区
 ```
 
-#####说到这里，重点来了，我们知道HashMap中默认的存储大小就是一个默认容量为16的数组，所以当我们创建出一个HashMap的对象时，即使里面没有任何元素，也要分出一块内存空间给它，而且我们不断的向HashMao里面put数据时，当达到一定容量限制时(这个容量满足这样的一个关系时将会扩容：HashMap 中的数据量>容量*加载因子，而HashMap中默认的加载因子是0.75),HashMap的空间将会扩大，而且扩大后新的空间一定是原来的两倍，我们可以看put方法中有这样一行代码：
+说到这里，重点来了，我们知道HashMap中默认的存储大小就是一个默认容量为16的数组，所以当我们创建出一个HashMap的对象时，即使里面没有任何元素，也要分出一块内存空间给它，而且我们不断的向HashMao里面put数据时，当达到一定容量限制时(这个容量满足这样的一个关系时将会扩容：HashMap 中的数据量>容量*加载因子，而HashMap中默认的加载因子是0.75),HashMap的空间将会扩大，而且扩大后新的空间一定是原来的两倍，我们可以看put方法中有这样一行代码：
 
 ```
 int newCapacity = oldCapacity * 2;
@@ -44,7 +44,7 @@ SparseArray比HashMap更省内存，在某些条件下性能更好，主要是�
     private int[] mKeys;
     private Object[] mValues;
 ```
-#####我们可以看到，SparseArray只能存储key为int类型的数据，同时，SparseArray在存储和读取数据时候，使用的是二分查找法，我们可以看看：
+我们可以看到，SparseArray只能存储key为int类型的数据，同时，SparseArray在存储和读取数据时候，使用的是二分查找法，我们可以看看：
 
 ```
  public void put(int key, E value) {
@@ -57,7 +57,9 @@ SparseArray比HashMap更省内存，在某些条件下性能更好，主要是�
         }
 ```
 #####也就是在put添加数据的时候，会使用二分查找法和之前的key比较当前我们添加的元素的key的大小，然后按照从小到大的顺序排列好，所以，SparseArray存储的元素都是按元素的key值从小到大排列好的。 而在获取数据的时候，也是使用二分查找法判断元素的位置，所以，在获取数据的时候非常快，比HashMap快的多，因为HashMap获取数据是通过遍历Entry[]数组来得到对应的元素。
-####添加数据、删除数据
+
+
+添加数据、删除数据
 
 ```
 public void put(int key, E value)
